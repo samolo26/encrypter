@@ -2,8 +2,6 @@ from Crypto.Cipher import AES
 import os
 import time
 import sys
-import shutil
-
 
 titulo = """
  ░▒▓██████▓▒░░▒▓████████▓▒░░▒▓███████▓▒░▒▓███████▓▒░░▒▓████████▓▒░░▒▓███████▓▒░ 
