@@ -203,7 +203,6 @@ def pas():
 
 # Menú principal
 def main():
-    global KEY
     key()  
 
     # Contraseña para mostrar la clave AES256
