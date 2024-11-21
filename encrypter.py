@@ -3,7 +3,6 @@ import os
 import time
 import sys
 
-
 titulo = """
  ░▒▓██████▓▒░░▒▓████████▓▒░░▒▓███████▓▒░▒▓███████▓▒░░▒▓████████▓▒░░▒▓███████▓▒░ 
 ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░             ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░        
@@ -66,21 +65,17 @@ time.sleep(0.8)
 os.system('color c')
 
 def animar_ascii_art_vertical(titulo, delay=0.1):
-    # Dividir el texto en líneas
+
     lineas = titulo.splitlines()
 
-    # Imprimir línea por línea con un pequeño retraso para la animación
     for i in range(len(lineas)):
-        sys.stdout.write("\033c")  # Limpiar la pantalla para dar el efecto de caída
-        for j in range(i + 1):  # Mostrar las primeras i+1 líneas
+        sys.stdout.write("\033c")  
+        for j in range(i + 1):  
             sys.stdout.write(lineas[j] + '\n')
-        sys.stdout.flush()  # Asegura que se imprima inmediatamente
-        time.sleep(delay)  # Pausa para dar el efecto de animación
-
-    # Asegurarse de que se imprima todo el contenido después de la animación
+        sys.stdout.flush()  
+        time.sleep(delay)  
     print()
 
-# Llamada a la función con un retardo de 0.1 segundos
 animar_ascii_art_vertical(titulo, 0.3)
 
 time.sleep(1.3)
@@ -88,25 +83,21 @@ clear_screen()
 
 os.system('color c')
 
-def imprimir_calavera_animada(calavera, delay=0.01):  # Reducir el delay para que sea más rápido
+def imprimir_calavera_animada(calavera, delay=0.01): 
     for i in range(len(calavera)):
         sys.stdout.write(calavera[i])
-        sys.stdout.flush()  # Asegura que el texto se imprima inmediatamente
-        time.sleep(delay)  # Pausa para crear la animación
-    print()  # Para asegurarse de que haya una nueva línea al final
+        sys.stdout.flush()  
+        time.sleep(delay)  
+    print()  
 
-# Llamada a la función con la calavera y un retardo más rápido de 0.01 segundos
-imprimir_calavera_animada(calavera, 0.005)
+imprimir_calavera_animada(calavera, 0.0035)
 
-def imprimir_candado_animada(candado, delay=0.01):  # Reducir el delay para que sea más rápido
+def imprimir_candado_animada(candado, delay=0.01):  
     for i in range(len(candado)):
         sys.stdout.write(candado[i])
-        sys.stdout.flush()  # Asegura que el texto se imprima inmediatamente
-        time.sleep(delay)  # Pausa para crear la animación
-    print()  # Para asegurarse de que haya una nueva línea al final
-
-# Llamada a la función con la calavera y un retardo más rápido de 0.01 segundos
-
+        sys.stdout.flush()  
+        time.sleep(delay)  
+    print()  
 
 # Clave AES256 predeterminada
 KEY_1 = "d24b8826a2530a9437c7ce9a557cbaf4922c8d1a6943f228a9d5e6fe2a6f303f"
@@ -116,7 +107,6 @@ KEY = None
 
 def key():
     global KEY
-    global KEY_99
     print("\n1. Introduce una KEY AES256")
     print("2. Usar KEY AES256 predeterminada\n")
     choice_1 = input("Seleccione una opción: ").strip()
@@ -124,8 +114,7 @@ def key():
 
     if choice_1 == '1':
         try:
-            KEY_99 = (input("Ingrese la clave AES256 que quieres usar (en formato hexadecimal): ").strip())
-            KEY = bytes.fromhex(KEY_99)
+            KEY = bytes.fromhex(input("Ingrese la clave AES256 que quieres usar (en formato hexadecimal): ").strip())
             clear_screen()
         except ValueError:
             print("Clave no válida. Asegúrate de que sea un valor hexadecimal.")
@@ -220,23 +209,21 @@ def main():
     # Contraseña para mostrar la clave AES256
     clave_1 = "sbssbs123"  
 
-    imprimir_candado_animada(candado, 0.02)
-    time.sleep(1.3)
+    imprimir_candado_animada(candado, 0.009)
+    time.sleep(1.1)
 
     print("\n--- Aplicación de Cifrado Avanzado (AES) ---\n")
     while True:
-        print("1 . Encriptar un archivo")
-        print("2 . Desencriptar un archivo\n")
-        print("3 . Encriptar una carpeta")
-        print("4 . Desencriptar una carpeta\n")
-        print("@ . Mostrar clave AES256 predeterminada")
-        print("# . Mostrar clave AES256 que esta siendo usada en esta sesion\n")
+        print("1. Encriptar un archivo")
+        print("2. Desencriptar un archivo\n")
+        print("3. Encriptar una carpeta")
+        print("4. Desencriptar una carpeta\n")
         print("5. Salir")
-        
+        print("@. Mostrar clave AES256\n")
         choice = input("Seleccione una opción: ").strip()
         clear_screen()
 
-        # Función encriptar archivos
+        #Función encriptar archivos
         if choice == '1':
             filepath = input("Ingrese la ruta completa del archivo a encriptar: ").strip()
             clear_screen()
@@ -247,7 +234,7 @@ def main():
             else:
                 print("El archivo no existe.")
                 pas()
-        # Función desencriptar archivo
+        #Función desencriptar archivo
         elif choice == '2':
             filepath = input("Ingrese la ruta completa del archivo a desencriptar: ").strip()
             clear_screen()
@@ -258,12 +245,11 @@ def main():
             else:
                 print("El archivo no existe")
                 pas()
-        # Función encriptar carpeta
+        #Función encriptar carpeta
         elif choice == '3':
             directory = input("Ingrese la ruta completa de la carpeta a encriptar: ").strip()
             if os.path.isdir(directory):
                 process_directory(directory, "encrypt")
-                print("Carpeta encriptada")
                 pas()
             else:
                 print("La carpeta no existe")
@@ -274,13 +260,13 @@ def main():
             clear_screen()
             if os.path.isdir(directory):
                 process_directory(directory, "decrypt")
-                print("Carpeta desencriptada")
+                print("Carpeta encriptada")
                 pas()
             else:
                 print("La carpeta no existe.")
                 pas()
            
-        # Mostrar clave AES256 que esta en el programa
+        # Mostrar clave AES256
         elif choice == '@':
             clave = input("Ingrese la contraseña para mostrar la clave: ")
             if clave == clave_1:
@@ -292,16 +278,6 @@ def main():
             else:
                 print("Clave proporcionada por el usuario no válida")
                 pas()
-
-        # Mostrar clave AES256 que esta cargada en esta sesion
-        elif choice == '#':
-            clave = input("Ingrese la contraseña para mostrar la clave: ")
-            if clave == clave_1:
-                clear_screen()
-                print("--- NO COMPARTAS ESTA CLAVE CON NADIE ---")
-                print(f"\n{KEY_99}")
-                time.sleep(3.5)
-                clear_screen()
 
         # Salir del programa
         elif choice == '5':
