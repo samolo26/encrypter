@@ -2,6 +2,7 @@ from Crypto.Cipher import AES
 import os
 import time
 import sys
+import msvcrt
 
 titulo = """
  ░▒▓██████▓▒░░▒▓████████▓▒░░▒▓███████▓▒░▒▓███████▓▒░░▒▓████████▓▒░░▒▓███████▓▒░ 
@@ -76,7 +77,7 @@ def animar_ascii_art_vertical(titulo, delay=0.1):
 
 animar_ascii_art_vertical(titulo, 0.3)
 
-time.sleep(1.3)
+time.sleep(1)
 clear_screen()
 
 os.system('color c')
@@ -103,13 +104,16 @@ KEY_1 = "d24b8826a2530a9437c7ce9a557cbaf4922c8d1a6943f228a9d5e6fe2a6f303f"
 # Inicializar la clave
 KEY = None
 
+# Main() KEY
 def key():
     global KEY
     print("\n1. Introduce una KEY AES256")
-    print("2. Usar KEY AES256 predeterminada\n")
+    print("2. Usar KEY AES256 predeterminada")
+    print("3. Genera una KEY AES256 random\n")
     choice_1 = input("Seleccione una opción: ").strip()
     clear_screen()
 
+    # Key custom
     if choice_1 == '1':
         try:
             KEY = bytes.fromhex(input("Ingrese la clave AES256 que quieres usar (en formato hexadecimal): ").strip())
@@ -119,13 +123,26 @@ def key():
             time.sleep(1.8)
             clear_screen()
             key()  
+
+    # Key predeterminada
     elif choice_1 == '2':
         print("Se usará la KEY predeterminada")
         KEY = bytes.fromhex(KEY_1)
         clear_screen()
+
+    # Key random    
+    elif choice_1 == '3':
+        clave_aes256 = os.urandom(32)
+        print("Clave AES-256:", clave_aes256.hex())
+        print("\nPresiona cualquier tecla para cerrar...")
+        msvcrt.getch()
+        print("Volviendo al menu")
+        time.sleep(0.8)
+        clear_screen()
+        key()
     else:
         print("Opción no válida")
-        time.sleep(1.8)
+        time.sleep(1.3)
         clear_screen()
         key() 
 
@@ -206,11 +223,11 @@ def main():
     # Contraseña para mostrar la clave AES256
     clave_1 = "sbssbs123"  
 
-    imprimir_candado_animada(candado, 0.009)
-    time.sleep(1.1)
-
-    print("\n--- Aplicación de Cifrado Avanzado (AES) ---\n")
+    imprimir_candado_animada(candado, 0.007)
+    time.sleep(0.85)
     while True:
+        print(candado)
+        print("\n--- Aplicación de Cifrado Avanzado (AES) ---\n")
         print("1. Encriptar un archivo")
         print("2. Desencriptar un archivo\n")
         print("3. Encriptar una carpeta")
@@ -222,56 +239,92 @@ def main():
 
         #Función encriptar archivos
         if choice == '1':
+            print("1. Volver al menu\n")
             filepath = input("Ingrese la ruta completa del archivo a encriptar: ").strip()
             clear_screen()
             if os.path.isfile(filepath):
                 encrypt_file(filepath)
-                print("Archivo encriptado")
+                print("\nArchivo encriptado")
                 pas()
+            elif filepath == '1':
+                print("Volviendo al menu principal")
+                time.sleep(0.8)
+                clear_screen()
+                
             else:
                 print("El archivo no existe.")
                 pas()
+
         #Función desencriptar archivo
         elif choice == '2':
+            print("1. Volver al menu\n")
             filepath = input("Ingrese la ruta completa del archivo a desencriptar: ").strip()
             clear_screen()
             if os.path.isfile(filepath):
                 decrypt_file(filepath)
-                print("Archivo desencriptado")
+                print("\nArchivo desencriptado")
                 pas()
+            elif filepath == '1':
+                print("Volviendo al menu principal")
+                time.sleep(0.8)
+                clear_screen()
+    
             else:
                 print("El archivo no existe")
                 pas()
+
         #Función encriptar carpeta
         elif choice == '3':
+            print("1. Volver al menu\n")
             directory = input("Ingrese la ruta completa de la carpeta a encriptar: ").strip()
+            clear_screen()
             if os.path.isdir(directory):
                 process_directory(directory, "encrypt")
+                print("\nCarpeta encriptada")
                 pas()
+            elif filepath == '1':
+                print("Volviendo al menu principal")
+                time.sleep(0.8)
+                clear_screen()
+                
             else:
                 print("La carpeta no existe")
                 pas()
+
         # Función desencriptar carpeta
         elif choice == '4':
+            print("1. Volver al menu\n")
             directory = input("Ingrese la ruta completa de la carpeta a desencriptar: ").strip()
             clear_screen()
             if os.path.isdir(directory):
                 process_directory(directory, "decrypt")
-                print("Carpeta encriptada")
+                print("\nCarpeta desencriptada")
                 pas()
+            elif filepath == '1':
+                print("Volviendo al menu principal")
+                time.sleep(0.8)
+                clear_screen()
+                
             else:
                 print("La carpeta no existe.")
                 pas()
            
         # Mostrar clave AES256
         elif choice == '@':
+            print("1. Volver al menu\n")
             clave = input("Ingrese la contraseña para mostrar la clave: ")
+            clear_screen()
             if clave == clave_1:
                 clear_screen()
                 print("--- NO COMPARTAS ESTA CLAVE CON NADIE ---")
                 print(f"\n{KEY_1}")
                 time.sleep(3.5)
                 clear_screen()
+            elif filepath == '1':
+                print("Volviendo al menu principal")
+                time.sleep(0.8)
+                clear_screen()
+                
             else:
                 print("Clave proporcionada por el usuario no válida")
                 pas()
