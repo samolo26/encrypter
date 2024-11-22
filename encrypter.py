@@ -46,12 +46,12 @@ $$$$"""$$$$$$$$uuu   uu$$$$$$$$$"""$$$"
 candado= '''
             .-""-.
            / .--. ;
-          / /    \ ;
+          / /    ; ;
           | |    | |
           | |.-""-.|
          ///`.::::.`;
-        ||| ::/  \:: ;
-        ||; ::\__/:: ;
+        ||| ::(  ):: ;
+        ||; ::(__):: ;
          //  '::::' /
           `=':-..-'`
 '''
@@ -218,6 +218,7 @@ def pas():
 
 # Menú principal
 def main():
+    global texto
     key()  
 
     # Contraseña para mostrar la clave AES256
@@ -227,13 +228,17 @@ def main():
     time.sleep(0.85)
     while True:
         print(candado)
-        print("\n--- Aplicación de Cifrado Avanzado (AES) ---\n")
-        print("1. Encriptar un archivo")
-        print("2. Desencriptar un archivo\n")
-        print("3. Encriptar una carpeta")
-        print("4. Desencriptar una carpeta\n")
-        print("5. Salir")
-        print("@. Mostrar clave AES256\n")
+        print("\n--- Aplicación de Cifrado Avanzado (AES) ---")
+
+        #
+        texto = print('''
+1. Encriptar un archivo
+2. Desencriptar un archivo\n
+3. Encriptar una carpeta
+4. Desencriptar una carpeta\n
+5. Salir
+@. Mostrar clave AES256
+''')
         choice = input("Seleccione una opción: ").strip()
         clear_screen()
 
@@ -250,7 +255,6 @@ def main():
                 print("Volviendo al menu principal")
                 time.sleep(0.8)
                 clear_screen()
-                
             else:
                 print("El archivo no existe.")
                 pas()
@@ -268,7 +272,6 @@ def main():
                 print("Volviendo al menu principal")
                 time.sleep(0.8)
                 clear_screen()
-    
             else:
                 print("El archivo no existe")
                 pas()
@@ -286,7 +289,6 @@ def main():
                 print("Volviendo al menu principal")
                 time.sleep(0.8)
                 clear_screen()
-                
             else:
                 print("La carpeta no existe")
                 pas()
@@ -304,7 +306,6 @@ def main():
                 print("Volviendo al menu principal")
                 time.sleep(0.8)
                 clear_screen()
-                
             else:
                 print("La carpeta no existe.")
                 pas()
@@ -324,7 +325,6 @@ def main():
                 print("Volviendo al menu principal")
                 time.sleep(0.8)
                 clear_screen()
-                
             else:
                 print("Clave proporcionada por el usuario no válida")
                 pas()
