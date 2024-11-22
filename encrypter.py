@@ -60,8 +60,6 @@ def clear_screen():
     else:  
         os.system('clear')
 
-time.sleep(0.8)
-
 os.system('color c')
 
 def animar_ascii_art_vertical(titulo, delay=0.1):
