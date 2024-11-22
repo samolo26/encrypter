@@ -198,7 +198,7 @@ def process_directory(directory, action):
                 decrypt_file(filepath)
 
 def pas():
-    time.sleep(1.8)
+    time.sleep(1.35)
     clear_screen()
 
 # Menú principal
