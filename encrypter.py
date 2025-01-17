@@ -226,11 +226,11 @@ def main():
 
     imprimir_candado_animada(candado, 0.007)
     time.sleep(0.85)
+    clear_screen()
     while True:
         print(candado)
         print("\n--- Aplicación de Cifrado Avanzado (AES) ---")
 
-        #
         texto = print('''
 1. Encriptar un archivo
 2. Desencriptar un archivo\n
