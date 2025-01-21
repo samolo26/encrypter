@@ -215,6 +215,7 @@ def process_directory(directory, action):
 def pas():
     time.sleep(1.35)
     clear_screen()
+    return(texto)
 
 # Menú principal
 def main():
@@ -229,7 +230,7 @@ def main():
     clear_screen()
     while True:
         print(candado)
-        print("\n--- Aplicación de Cifrado Avanzado (AES) ---")
+        print("\n--- Encrypter ---")
 
         texto = print('''
 1. Encriptar un archivo
@@ -237,7 +238,8 @@ def main():
 3. Encriptar una carpeta
 4. Desencriptar una carpeta\n
 5. Salir
-@. Mostrar clave AES256
+@. Mostrar clave AES256\n
+\nmade by pepe
 ''')
         choice = input("Seleccione una opción: ").strip()
         clear_screen()
@@ -245,16 +247,18 @@ def main():
         #Función encriptar archivos
         if choice == '1':
             print("1. Volver al menu\n")
-            filepath = input("Ingrese la ruta completa del archivo a encriptar: ").strip()
+            dato = input("Ingrese la ruta completa del archivo a encriptar: ").strip()
             clear_screen()
-            if os.path.isfile(filepath):
-                encrypt_file(filepath)
+        
+            if os.path.isfile(dato):
+                encrypt_file(dato)
                 print("\nArchivo encriptado")
                 pas()
-            elif filepath == '1':
+
+            elif dato == '1':
                 print("Volviendo al menu principal")
-                time.sleep(0.8)
-                clear_screen()
+                return(texto)
+
             else:
                 print("El archivo no existe.")
                 pas()
@@ -262,16 +266,18 @@ def main():
         #Función desencriptar archivo
         elif choice == '2':
             print("1. Volver al menu\n")
-            filepath = input("Ingrese la ruta completa del archivo a desencriptar: ").strip()
+            dato = input("Ingrese la ruta completa del archivo a desencriptar: ").strip()
             clear_screen()
-            if os.path.isfile(filepath):
-                decrypt_file(filepath)
+
+            if os.path.isfile(dato):
+                decrypt_file(dato)
                 print("\nArchivo desencriptado")
                 pas()
-            elif filepath == '1':
+
+            elif dato == '1':
                 print("Volviendo al menu principal")
-                time.sleep(0.8)
-                clear_screen()
+                pas()
+
             else:
                 print("El archivo no existe")
                 pas()
@@ -279,16 +285,18 @@ def main():
         #Función encriptar carpeta
         elif choice == '3':
             print("1. Volver al menu\n")
-            directory = input("Ingrese la ruta completa de la carpeta a encriptar: ").strip()
+            dato = input("Ingrese la ruta completa de la carpeta a encriptar: ").strip()
             clear_screen()
-            if os.path.isdir(directory):
-                process_directory(directory, "encrypt")
+
+            if os.path.isdir(dato):
+                process_directory(dato, "encrypt")
                 print("\nCarpeta encriptada")
                 pas()
-            elif filepath == '1':
+
+            elif dato == '1':
                 print("Volviendo al menu principal")
-                time.sleep(0.8)
-                clear_screen()
+                pas()
+
             else:
                 print("La carpeta no existe")
                 pas()
@@ -296,16 +304,18 @@ def main():
         # Función desencriptar carpeta
         elif choice == '4':
             print("1. Volver al menu\n")
-            directory = input("Ingrese la ruta completa de la carpeta a desencriptar: ").strip()
+            dato = input("Ingrese la ruta completa de la carpeta a desencriptar: ").strip()
             clear_screen()
-            if os.path.isdir(directory):
-                process_directory(directory, "decrypt")
+
+            if os.path.isdir(dato):
+                process_directory(dato, "decrypt")
                 print("\nCarpeta desencriptada")
                 pas()
-            elif filepath == '1':
+
+            elif dato == '1':
                 print("Volviendo al menu principal")
-                time.sleep(0.8)
-                clear_screen()
+                pas()
+
             else:
                 print("La carpeta no existe.")
                 pas()
@@ -315,16 +325,16 @@ def main():
             print("1. Volver al menu\n")
             clave = input("Ingrese la contraseña para mostrar la clave: ")
             clear_screen()
+
             if clave == clave_1:
                 clear_screen()
                 print("--- NO COMPARTAS ESTA CLAVE CON NADIE ---")
                 print(f"\n{KEY_1}")
-                time.sleep(3.5)
-                clear_screen()
-            elif filepath == '1':
-                print("Volviendo al menu principal")
-                time.sleep(0.8)
-                clear_screen()
+                print("\nPresiona cualquier tecla para cerrar...")
+                msvcrt.getch()
+                print("Volviendo al menu")
+                pas()
+
             else:
                 print("Clave proporcionada por el usuario no válida")
                 pas()
@@ -332,8 +342,9 @@ def main():
         # Salir del programa
         elif choice == '5':
             print("Saliendo de la aplicación.")
-            pas()
+            time.sleep(1.2)
             break
+        
         else:
             print("Opción no válida. Inténtelo de nuevo.")
             pas()
